@@ -7,11 +7,15 @@ class Filter(object):
         self._queries = queries
         self._grams = grams
         try:
-            data = '../data/'
-            self._cities = [w.decode('utf-8', 'ignore') for w in open(data + 'city.lst').read().upper().split('\n')]
-            self._countries = [w.decode('utf-8', 'ignore') for w in open(data + 'country.lst').read().upper().split('\n')]
-            self._males = [w.decode('utf-8', 'ignore') for w in open(data + 'person_male.lst').read().split('\n')]
-            self._females = [w.decode('utf-8', 'ignore') for w in open(data + 'person_female.lst').read().split('\n')]
+            data_p = os.path.join(os.path.realpath('..'), 'data')
+            self._cities = [w.decode('utf-8', 'ignore')
+                    for w in open(os.path.join(data_p, 'city.lst')).read().upper().split('\n')]
+            self._countries = [w.decode('utf-8', 'ignore')
+                    for w in open(os.path.join(data_p, 'country.lst')).read().upper().split('\n')]
+            self._males = [w.decode('utf-8', 'ignore')
+                    for w in open(os.path.join(data_p, 'person_male.lst')).read().split('\n')]
+            self._females = [w.decode('utf-8', 'ignore')
+                    for w in open(os.path.join(data_p, 'person_female.lst')).read().split('\n')]
         except:
             print "Error reading list files"
 
@@ -78,5 +82,5 @@ class Filter(object):
                 for w in g:
                     if f(w):
                         failed += 1
-                self._grams[g] /= (3 + failed)
+                self._grams[g] /= (1 + failed)
         return self._grams

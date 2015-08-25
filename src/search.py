@@ -1,5 +1,7 @@
+import argparse, os, sys
+sys.path.append(os.path.join(os.path.realpath('..'), 'lib'))
+
 import engine, query, filter, tile
-import argparse
 
 def search(queryinput, key, provider, cutoff, n):
     e = engine.Engine(provider, key)
